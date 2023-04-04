@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title" %}Login{% endblock %}
+
+{% block content %}
+    <h1>Masuk</h1>
+    {% if form.errors %}
+    <p>
+        Silahkan cek ulang username dan password anda
+    </p>
+    {% else %}
+    <p>
+        Silahkan gunakan form yang ada untuk masuk
+    </p>
+    {% endif %}
+    <div class="login">
+        <form action="{% url 'login' %}" method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}">
+            <p>
+                <input type="submit" value="Masuk">
+            </p>
+        </form>
+        <p>
+            <a href="{% url 'register' %}">
+                Registrasi Akun
+            </a>
+        </p>
+        <p>
+            <a href="{% url 'password_reset' %}">
+                Lupa password
+            </a>
+        </p>
+    </div>
+{% endblock %}
